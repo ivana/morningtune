@@ -1,16 +1,24 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
   <head>
-    <meta charset="UTF-8" />
-    <meta name="author" lang="hr" content="Ivana Vasilj, ivasilj@gmail.com" />
+    <meta charset="UTF-8">
+    <meta name="author" lang="hr" content="Ivana Vasilj, ivasilj@gmail.com">
 
-    <!-- <link rel="stylesheet" href="morning.css"> -->
+    <link rel="stylesheet" href="morning.css">
 
     <title>Morning Tune</title>
   </head>
   
   <body>
+    <form id="user">
+      <p>
+        <label for="username">last.fm user:</label>
+        <input type="text" name="username" id="username" placeholder="last.fm username">
+      </p>
+      <p><button>Morning Tune</button></p>
+    </form>
+
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
     <script src="morning.js"></script>
   </body>
