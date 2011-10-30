@@ -12,26 +12,32 @@ $(function(){
   // toUTS = 1pm_localtime + offset [s]
   var toUTS = Date.UTC(today.getFullYear(), today.getMonth(), today.getDate(), 13 + offset) / 1000;
 
-  $('form#user').submit(function(){
+
+  $('form#user').live('submit', function(){
     var user = $('#username').val();
 
-    if (!user) console.log('You have to enter a last.fm username first');
+    if (!user) $('form + p').html('You have to enter a last.fm username first');
     else { // console.log(user)
 
       var url = 'http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&format=json&limit=200&user=' + user + '&api_key=' + api_key + '&from=' + fromUTS + '&to=' + toUTS;
 
-      $.get(url, function(data) {
-        if (data.error) console.log(data.message);
+      $.get(url, function(data) { // console.log(data)
+
+        // Firefox thinks data.property is a label and throws the invalid label syntax error
+        if (navigator.userAgent.match(/Firefox/)) data = eval('(' + data + ')');
+
+        if (data.error) $('form + p').html(data.message);
 
         else if (data.recenttracks) { // console.log(data.recenttracks)
           if (data.recenttracks.track) {
-            var tune = data.recenttracks.track[data.recenttracks.track.length - 1].name;
-            console.log(tune);
+            var tune = data.recenttracks.track[data.recenttracks.track.length - 1];
+            var track = tune.name;
+            $('form + p').html(track);
           }
-          else console.log("This user's morning was without a song :(");
+          else $('form + p').html("This user's morning was without a song :(");
         }
 
-        else console.log("There was a problem with fetching user's morning tune");
+        else $('form + p').html("There was a problem with fetching user's morning tune");
       });
     }
 

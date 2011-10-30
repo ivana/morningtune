@@ -3,7 +3,7 @@ body {
   width:500px; margin:0 auto; padding:50px;
   text-align:center;
   border-width:0 1px; border-style:solid; border-color:silver;
-  font-size:14px;
+  font:14px "Lucida Grande", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 #user label { display:none; }
@@ -23,3 +23,5 @@ body {
   background-image: -ms-linear-gradient(top, #efefef, #f9f9f9); /* IE 10+ */
   background-image: -o-linear-gradient(top, #efefef, #f9f9f9); /* Opera 11.10+ */
 }
+
+#user + p { color:indianred; }
