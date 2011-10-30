@@ -18,29 +18,32 @@ $(function(){
     var user = $('#username').val();
 
     if (!user) $('form').after('<p>You have to enter a last.fm username first</p>');
-    else { // console.log(user)
+    else {
 
       var url = 'http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&format=json&limit=200&user=' + user + '&api_key=' + api_key + '&from=' + fromUTS + '&to=' + toUTS;
 
-      $.get(url, function(data) { // console.log(data)
+      $.get(url, function(data) {
 
         // Firefox thinks data.property is a label and throws the invalid label syntax error
         if (navigator.userAgent.match(/Firefox/)) data = eval('(' + data + ')');
 
         if (data.error) $('form').after('<p>' + data.message + '</p>');
 
-        else if (data.recenttracks) { // console.log(data.recenttracks)
+        else if (data.recenttracks) {
           if (data.recenttracks.track) {
             var tracks = data.recenttracks.track;
             var first = tracks.length ? tracks[tracks.length - 1] : tracks; // array or one track?
 
             var tune = first.name;
-            console.log(first)
             var artist = first.artist['#text'];
+            var album = first.album['#text'];
             var imgurl = first.image[first.image.length - 1]['#text'];
+            var time = new Date(first.date.uts * 1000).toTimeString();
 
-            $('form').after('<section><h1><span>' + artist + '</span> - <span>' + tune + '</span></h1></section>');
-            if (imgurl) $('section').append('<img src="' + imgurl + '">');
+            $('form').after('<section><h1>' + artist + ' - ' + tune + '</h1></section>');
+            if (imgurl)
+              $('section').append('<figure><img src="' + imgurl + '" /><figcaption> from <em>' + album + '</em></figcaption></figure>');
+            $('section').append('<p>played at ' + time + '</p>');
           }
           else $('form').after("<p>This user's morning was without a song :(</p>");
         }
