@@ -6,7 +6,7 @@ body {
   font:14px "Lucida Grande", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-#user label { display:none; }
+h1, #user label { position:absolute; left:-10000px; }
 #username, #user button {
   -webkit-box-sizing:border-box; -moz-box-sizing:border-box; box-sizing: border-box;
   width:200px; /*height:25px;*/
