@@ -1,9 +1,9 @@
 * { margin:0; padding:0; }
 body {
   color:lightcoral;
-  width:400px; margin:0 auto; padding:50px;
+  width:300px; margin:0 auto; padding:50px;
   text-align:center;
-  border-width:0 1px 1px; border-style:solid; border-color:silver;
+/*  border-width:0 1px 1px; border-style:solid; border-color:silver; border-radius:0 0 5px 5px;*/
   font:14px "Lucida Grande", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
