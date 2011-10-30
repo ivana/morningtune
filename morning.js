@@ -14,7 +14,7 @@ $(function(){
 
 
   $('form#user').live('submit', function(){
-    $('form + p, section').remove();
+    $('form + p, section, footer').remove();
     var user = $('#username').val();
 
     if (!user) $('form').after('<p>You have to enter a last.fm username first</p>');
@@ -44,8 +44,9 @@ $(function(){
             if (imgurl)
               $('section').append('<figure><img src="' + imgurl + '" /><figcaption> from <em>' + album + '</em></figcaption></figure>');
             $('section').append('<p>played at ' + time + '</p>');
+            $('section').after('<footer><p>Powered by AudioScrobbler</p><a href="http://www.last.fm"><img alt="last.fm logo" src="lastfm_black.gif"></a></footer>');
           }
-          else $('form').after("<p>This user's morning was without a song :(</p>");
+          else $('form').after("<p>This user's morning was without a song</p>");
         }
 
         else $('form').after("<p>There was a problem with fetching user's morning tune</p>");
