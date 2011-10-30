@@ -30,9 +30,10 @@ $(function(){
 
         else if (data.recenttracks) { // console.log(data.recenttracks)
           if (data.recenttracks.track) {
-            var tune = data.recenttracks.track[data.recenttracks.track.length - 1];
-            var track = tune.name;
-            $('form + p').html(track);
+            var tracks = data.recenttracks.track;
+            var first = tracks.length ? tracks[tracks.length - 1] : tracks; // array or one track?
+            var tune = first.name;
+            $('form + p').html(tune);
           }
           else $('form + p').html("This user's morning was without a song :(");
         }
