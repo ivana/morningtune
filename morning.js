@@ -1,6 +1,9 @@
 $(function(){
   var api_key = '502149483544d6c38f633b3b89f88fd0';
+
   var today = new Date();
+  // consider a previous day as today if it's less than 5am
+  if (today.getHours() < 5) today = new Date(new Date() - 1000 * 60 * 60 * 24);
 
   // offset = UTC - localtime [h]
   var offset = new Date().getTimezoneOffset() / 60;
