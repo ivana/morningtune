@@ -14,9 +14,10 @@ $(function(){
 
 
   $('form#user').live('submit', function(){
+    $('form + p, section').remove();
     var user = $('#username').val();
 
-    if (!user) $('form + p').html('You have to enter a last.fm username first');
+    if (!user) $('form').after('<p>You have to enter a last.fm username first</p>');
     else { // console.log(user)
 
       var url = 'http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&format=json&limit=200&user=' + user + '&api_key=' + api_key + '&from=' + fromUTS + '&to=' + toUTS;
@@ -26,19 +27,25 @@ $(function(){
         // Firefox thinks data.property is a label and throws the invalid label syntax error
         if (navigator.userAgent.match(/Firefox/)) data = eval('(' + data + ')');
 
-        if (data.error) $('form + p').html(data.message);
+        if (data.error) $('form').after('<p>' + data.message + '</p>');
 
         else if (data.recenttracks) { // console.log(data.recenttracks)
           if (data.recenttracks.track) {
             var tracks = data.recenttracks.track;
             var first = tracks.length ? tracks[tracks.length - 1] : tracks; // array or one track?
+
             var tune = first.name;
-            $('form + p').html(tune);
+            console.log(first)
+            var artist = first.artist['#text'];
+            var imgurl = first.image[first.image.length - 1]['#text'];
+
+            $('form').after('<section><h1><span>' + artist + '</span> - <span>' + tune + '</span></h1></section>');
+            if (imgurl) $('section').append('<img src="' + imgurl + '">');
           }
-          else $('form + p').html("This user's morning was without a song :(");
+          else $('form').after("<p>This user's morning was without a song :(</p>");
         }
 
-        else $('form + p').html("There was a problem with fetching user's morning tune");
+        else $('form').after("<p>There was a problem with fetching user's morning tune</p>");
       });
     }
 
