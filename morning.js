@@ -20,12 +20,9 @@ $(function(){
     if (!user) $('form').after('<p>You have to enter a last.fm username first</p>');
     else {
 
-      var url = 'http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&format=json&limit=200&user=' + user + '&api_key=' + api_key + '&from=' + fromUTS + '&to=' + toUTS;
+      var url = 'http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&format=json&limit=200&user=' + user + '&api_key=' + api_key + '&from=' + fromUTS + '&to=' + toUTS + '&callback=?';
 
-      $.get(url, function(data) {
-
-        // Firefox thinks data.property is a label and throws the invalid label syntax error
-        if (navigator.userAgent.match(/Firefox/)) data = eval('(' + data + ')');
+      $.getJSON(url, function(data) {
 
         if (data.error) $('form').after('<p>' + data.message + '</p>');
 
