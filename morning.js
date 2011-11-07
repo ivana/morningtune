@@ -35,12 +35,12 @@ $(function(){
             var artist = first.artist['#text'];
             var album = first.album['#text'];
             var imgurl = first.image[first.image.length - 1]['#text'];
-            var time = new Date(first.date.uts * 1000).toTimeString();
+            var time = new Date(first.date.uts * 1000);
 
             $('form').after('<section><h1>' + artist + ' - ' + tune + '</h1></section>');
             if (imgurl)
               $('section').append('<figure><img src="' + imgurl + '" /><figcaption> from <em>' + album + '</em></figcaption></figure>');
-            $('section').append('<p>played at ' + time + '</p>');
+            $('section').append('<p>played at <time datetime="' + time.toISOString() + '">' + time.toTimeString() + '</time></p>');
             $('section').after('<footer><p>Powered by AudioScrobbler</p><a href="http://www.last.fm"><img alt="last.fm logo" src="lastfm_black.gif"></a></footer>');
           }
           else $('form').after("<p>This user's morning was without a song</p>");
