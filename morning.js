@@ -14,7 +14,7 @@ $(function(){
 
 
   $('form#user').live('submit', function(){
-    $('form + p, section, footer').remove();
+    $('form ~ p, section, footer').remove();
     var user = $('#username').val();
 
     if (!user) $('form').after('<p>You have to enter a last.fm username first</p>');
