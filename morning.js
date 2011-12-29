@@ -13,7 +13,7 @@ $(function(){
   var toUTS = Date.UTC(today.getFullYear(), today.getMonth(), today.getDate(), 13 + offset) / 1000;
 
 
-  $('form#user').live('submit', function(){
+  $('form#user').on('submit', function(){
     $('form ~ p, section, footer').remove();
     var user = $('#username').val();
 
