@@ -57,13 +57,14 @@ $(function(){
 
     var tune = first.name
     var artist = first.artist['#text']
+    var artist_url = 'http://www.last.fm/music/' + artist.replace(' ', '+')
     var album = first.album['#text']
-    var imgurl = first.image[first.image.length - 1]['#text']
+    var img_url = first.image[first.image.length - 1]['#text']
     var time = new Date(first.date.uts * 1000)
 
-    $(selector).after('<section><h1>' + artist + ' - ' + tune + '</h1></section>')
-    if (imgurl)
-      $('section').append('<figure><img src="' + imgurl + '" /><figcaption> from <em>' + album + '</em></figcaption></figure>')
+    $(selector).after('<section><h1><a href="' + artist_url + '">' + artist + '</a> - ' + tune + '</h1></section>')
+    if (img_url)
+      $('section').append('<figure><img src="' + img_url + '" /><figcaption> from <em>' + album + '</em></figcaption></figure>')
     $('section').append('<p>played at <time datetime="' + time.toISOString() + '">' + time.toTimeString() + '<br>' + time.toDateString() + '</time></p>')
     $('section').after('<footer><p>Powered by AudioScrobbler</p><a href="http://www.last.fm"><img alt="last.fm logo" src="lastfm_black.gif"></a></footer>')
 
