@@ -2,7 +2,7 @@ $(function(){
   var api_key = '502149483544d6c38f633b3b89f88fd0';
 
   var today = new Date();
-  // consider a previous day as today if it's less than 5am
+  // consider a previous day as today if it's earlier than 5am
   if (today.getHours() < 5) today = new Date(new Date() - 1000 * 60 * 60 * 24);
 
   // offset = UTC - localtime [h]
@@ -10,7 +10,7 @@ $(function(){
   // fromUTS = 5am_localtime + offset [s]; UTS -> UTC seconds
   var fromUTS = Date.UTC(today.getFullYear(), today.getMonth(), today.getDate(), 5 + offset) / 1000;
   // toUTS = 1pm_localtime + offset [s]
-  var toUTS = Date.UTC(today.getFullYear(), today.getMonth(), today.getDate(), 13 + offset) / 1000;
+  var toUTS = Date.UTC(today.getFullYear(), today.getMonth(), today.getDate(), 14 + offset) / 1000;
 
 
   $('form#user').on('submit', function(){
@@ -43,7 +43,7 @@ $(function(){
             $('section').append('<p>played at <time datetime="' + time.toISOString() + '">' + time.toTimeString() + '</time></p>');
             $('section').after('<footer><p>Powered by AudioScrobbler</p><a href="http://www.last.fm"><img alt="last.fm logo" src="lastfm_black.gif"></a></footer>');
           }
-          else $('form').after("<p>This user's morning was without a song</p>");
+          else $('form').after("<p>This user's morning was without a song.</p>");
         }
 
         else $('form').after("<p>There was a problem with fetching user's morning tune</p>");
