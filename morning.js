@@ -64,7 +64,7 @@ $(function(){
     $(selector).after('<section><h1>' + artist + ' - ' + tune + '</h1></section>');
     if (imgurl)
       $('section').append('<figure><img src="' + imgurl + '" /><figcaption> from <em>' + album + '</em></figcaption></figure>');
-    $('section').append('<p>played at <time datetime="' + time.toISOString() + '">' + time.toTimeString() + '</time></p>');
+    $('section').append('<p>played at <time datetime="' + time.toISOString() + '">' + time.toTimeString() + '<br>' + time.toDateString() + '</time></p>');
     $('section').after('<footer><p>Powered by AudioScrobbler</p><a href="http://www.last.fm"><img alt="last.fm logo" src="lastfm_black.gif"></a></footer>');
 
   }
